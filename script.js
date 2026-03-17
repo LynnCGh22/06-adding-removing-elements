@@ -14,7 +14,26 @@ form.addEventListener("submit", function(event) {
 	}
 
 	const newItem = document.createElement("li");
-	newItem.textContent = itemText;
+
+	const itemLabel = document.createElement("span");
+	itemLabel.textContent = itemText;
+
+	const deleteButton = document.createElement("button");
+	deleteButton.type = "button";
+	deleteButton.className = "delete-btn";
+	deleteButton.setAttribute("aria-label", "Delete item");
+
+	const deleteIcon = document.createElement("i");
+	deleteIcon.className = "fa-solid fa-trash";
+	deleteButton.appendChild(deleteIcon);
+
+	// Remove this list item when its delete button is clicked.
+	deleteButton.addEventListener("click", function() {
+		newItem.remove();
+	});
+
+	newItem.appendChild(itemLabel);
+	newItem.appendChild(deleteButton);
 
 	list.appendChild(newItem);
 	itemInput.value = "";
